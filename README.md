@@ -1,6 +1,6 @@
 # blink-cmp-progress
 
-A blimk cmp source for Progress 4GL language.
+A [blink.cmp](https://github.com/Saghen/blink.cmp) source for Progress 4GL language.
 
 ## Installation
 ### lazy.nvim
