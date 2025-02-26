@@ -25,9 +25,7 @@ end
 
 function ProgressSource.new(opts)
 	local self = setmetatable({}, { __index = ProgressSource })
-	config = vim.tbl_deep_extend("keep", opts or {}, {
-		insert = true,
-	})
+	config = vim.tbl_deep_extend("keep", opts or {}, defaults)
 	if not keywords then
 		keywords = require("blink-cmp-progress.keywords").get()
 	end
