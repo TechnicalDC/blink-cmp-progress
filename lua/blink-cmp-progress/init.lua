@@ -15,7 +15,7 @@ local function transform(items, context)
 			kind = items.kind,
 			textEdit = {
 				range = {
-					start = { line = context.cursor[1] - 1, character = context.bounds.start_col - 2 },
+					start = { line = context.cursor[1] - 1, character = context.bounds.start_col - 1 },
 					["end"] = { line = context.cursor[1] - 1, character = context.cursor[2] },
 				},
 			},
