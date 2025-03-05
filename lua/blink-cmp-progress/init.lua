@@ -39,6 +39,16 @@ function ProgressSource.new(opts)
             }
          })
       end
+      for _, item in ipairs(config.custom_items) do
+         table.insert(items, {
+            label = item.label,
+            kind = item.kind,
+            insertText = item.label,
+            textEdit = {
+               newText = item.label
+            }
+         })
+      end
 	end
 	return self
 end
