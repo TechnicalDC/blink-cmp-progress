@@ -3,6 +3,7 @@ local defaults = require("blink-cmp-progress.defaults")
 local async = require("blink.cmp.lib.async")
 local keywords
 local config
+local items = {}
 
 --- @class blink.cmp.Source
 local ProgressSource = {}
@@ -28,6 +29,16 @@ function ProgressSource.new(opts)
 	config = vim.tbl_deep_extend("keep", opts or {}, defaults)
 	if not keywords then
 		keywords = require("blink-cmp-progress.keywords").get()
+      for _, item in ipairs(keywords) do
+         table.insert(items, {
+            label = item.label,
+            kind = item.kind,
+            insertText = item.label,
+            textEdit = {
+               newText = item.label
+            }
+         })
+      end
 	end
 	return self
 end
@@ -46,14 +57,14 @@ function ProgressSource:get_completions(context, callback)
                return true
             end
             return false
-         end, keywords)
+         end, items)
       end
 
 		callback({
 			is_incomplete_forward = true,
 			is_incomplete_backward = true,
 			-- items = transform(keywords, context),
-			items = is_char_trigger and transform(filtered, context) or transform(keywords, context),
+			items = is_char_trigger and transform(filtered, context) or transform(items, context),
 			context = context,
 		})
 	end)
